@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinTrack Pro — ll</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<!-- ===== navbar ===== -->
+<nav class="navbar">
+  <div class="brand">FinTrack <span>Pro</span></div>
+
+  <div class="nav-links">
+    <button class="nav-link active" id="nav-dashboard" data-page="dashboard">Dashboard</button>
+    <button class="nav-link" id="nav-settings" data-page="settings">Settings</button>
+  </div>
+
+  <div class="nav-actions">
+    <span class="greeting">Hi, <strong id="greeting-name">—</strong></span>
+    <button id="add-tx-btn" class="btn btn-primary">+ Add Transaction</button>
+    <button id="logout-btn" class="btn btn-ghost">Logout</button>
+  </div>
+</nav>
+
+<!-- ===== DASHBOARD PAGE ===== -->
+<main class="page" id="page-dashboard">
+
+  <section class="summary-row">
+    <div class="summary-card accent-indigo">
+      <span class="summary-label">Current Balance</span>
+      <span class="summary-value mono" id="stat-balance">0.00</span>
+    </div>
+    <div class="summary-card accent-green">
+      <span class="summary-label">Total Income</span>
+      <span class="summary-value mono positive" id="stat-income">0.00</span>
+    </div>
+    <div class="summary-card accent-red">
+      <span class="summary-label">Total Expense</span>
+      <span class="summary-value mono negative" id="stat-expense">0.00</span>
+    </div>
+    <div class="summary-card accent-indigo">
+      <span class="summary-label">Total Transactions</span>
+      <span class="summary-value mono" id="stat-count">0</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="panel-title">Cash Flow</h2>
+    <div class="chart-wrap">
+      <canvas id="flow-chart"></canvas>
+    </div>
+    <p class="empty-text hidden" id="chart-empty">No transactions yet — the chart will appear once you add some.</p>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header-row">
+      <h2 class="panel-title">Transactions</h2>
+      <div class="filter-group" role="group" aria-label="Filter transactions">
+        <button class="filter-btn active" data-filter="all">All Types</button>
+        <button class="filter-btn" data-filter="income">Income Only</button>
+        <button class="filter-btn" data-filter="expense">Expense Only</button>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="tx-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tx-table-body"></tbody>
+      </table>
+    </div>
+    <p class="empty-text hidden" id="tx-empty">No transactions recorded yet. Click "Add Transaction" to get started.</p>
+  </section>
+</main>
+
+<!-- ===== SETTINGS PAGE ===== -->
+<main class="page hidden" id="page-settings">
+  <section class="panel settings-panel">
+    <h2 class="panel-title">Profile Settings</h2>
+
+    <form id="settings-form">
+      <div class="field">
+        <label for="settings-name">Display name</label>
+        <input type="text" id="settings-name">
+      </div>
+      <div class="field">
+        <label for="settings-currency">Preferred currency</label>
+        <select id="settings-currency">
+          <option value="USD">USD — US Dollar</option>
+          <option value="EUR">EUR — Euro</option>
+          <option value="GBP">GBP — British Pound</option>
+          <option value="INR">INR — Indian Rupee</option>
+          <option value="JPY">JPY — Japanese Yen</option>
+        </select>
+      </div>
+
+      <div class="field field-inline">
+        <label for="dark-mode-toggle">Dark mode</label>
+        <label class="switch">
+          <input type="checkbox" id="dark-mode-toggle">
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+
+    <div class="settings-divider"></div>
+
+    <h2 class="panel-title" style="color: var(--red);">Danger Zone</h2>
+    <p class="empty-text" style="margin: 0 0 1rem;">This clears every account and transaction stored in this browser. This cannot be undone.</p>
+    <button id="reset-btn" class="btn btn-danger">Reset All Data</button>
+  </section>
+</main>
+
+<!-- ===== ADD TRANSACTION MODAL ===== -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <h2 class="panel-title" id="modal-title">Add Transaction</h2>
+      <button class="btn-icon" id="modal-close" aria-label="Close">✕</button>
+    </div>
+
+    <form id="tx-form">
+      <div class="field-row">
+        <div class="field">
+          <label for="tx-type">Type</label>
+          <select id="tx-type">
+            <option value="income">Income</option>
+            <option value="expense" selected>Expense</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tx-amount">Amount</label>
+          <input type="number" id="tx-amount" step="0.01" min="0" placeholder="0.00">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="tx-description">Description</label>
+        <input type="text" id="tx-description" placeholder="e.g. Grocery run, Monthly salary">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="tx-category">Category</label>
+          <select id="tx-category">
+            <option>Food &amp; Dining</option>
+            <option>Shopping</option>
+            <option>Recharge &amp; Bills</option>
+            <option>Petrol &amp; Auto</option>
+            <option>Utilities</option>
+            <option>Salary</option>
+            <option>Entertainment</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tx-date">Date</label>
+          <input type="date" id="tx-date">
+        </div>
+      </div>
+
+      <p class="error-text" id="tx-error"></p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Transaction</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="js/storage.js"></script>
+<script src="js/transactions.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

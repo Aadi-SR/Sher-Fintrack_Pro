@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinTrack Pro — Sign In</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <main class="auth-screen">
+    <div class="auth-card tick-margin">
+      <div class="ledger-mark">FinTrack <span>Pro</span></div>
+      <p class="auth-tagline">See where your money goes.</p>
+
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" autocomplete="username" placeholder="e.g. aravind">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" autocomplete="current-password" placeholder="••••••••">
+        </div>
+
+        <p class="error-text" id="login-error"></p>
+
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      </form>
+
+      <p class="auth-switch">
+        New here? <a href="register.html">Open an account</a>
+      </p>
+    </div>
+  </main>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

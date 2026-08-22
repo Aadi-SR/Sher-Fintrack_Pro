@@ -1,0 +1,296 @@
+/* ============================================================
+   style.css — shared tokens + base styles (loaded on every page)
+   Palette: indigo (accent), green (income), red (expense)
+   ============================================================ */
+
+:root {
+  /* -- accents (constant across modes) -- */
+  --indigo: #4f46e5;
+  --indigo-dark: #4338ca;
+  --indigo-soft: #eef0ff;
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --red: #dc2626;
+  --red-soft: #fee2e2;
+
+  /* -- light mode (default) -- */
+  --bg: #f4f5f9;
+  --bg-soft: #ffffff;
+  --line: #e2e4ec;
+  --text: #1e2433;
+  --text-dim: #6b7280;
+
+  /* -- fonts -- */
+  --font-body: "Inter", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 160ms ease;
+  --shadow: 0 1px 2px rgba(20, 25, 45, 0.04), 0 4px 14px rgba(20, 25, 45, 0.05);
+}
+
+body.dark-mode {
+  --bg: #0f1222;
+  --bg-soft: #1a1f35;
+  --line: #2a2f4a;
+  --text: #e5e7f0;
+  --text-dim: #9096b0;
+  --indigo-soft: rgba(79, 70, 229, 0.16);
+  --green-soft: rgba(22, 163, 74, 0.16);
+  --red-soft: rgba(220, 38, 38, 0.16);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  transition:
+    background var(--transition),
+    color var(--transition);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  margin: 0;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input,
+select,
+button {
+  font-size: 0.95rem;
+}
+
+::selection {
+  background: var(--indigo);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 2px;
+}
+
+/* ============ */
+
+/* Brand and Navbar */
+
+.brand,
+.ledger-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text);
+}
+
+.brand span {
+  color: var(--indigo);
+}
+
+/* ============  buttons ============= */
+.btn {
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  color: var(--text);
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+.btn:hover {
+  border-color: var(--indigo);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--indigo);
+  border-color: var(--indigo);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--indigo-dark);
+  border-color: var(--indigo-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--text-dim);
+}
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+
+.btn-danger {
+  background: transparent;
+  border: 1px solid var(--red);
+  color: var(--red);
+}
+.btn-danger:hover {
+  background: var(--red-soft);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-icon {
+  border: none;
+  background: none;
+  color: var(--text-dim);
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+.btn-icon:hover {
+  background: var(--indigo-soft);
+  color: var(--indigo);
+}
+
+.btn-text {
+  border: none;
+  background: none;
+  color: var(--indigo);
+  padding: 0.3rem 0;
+  font-weight: 600;
+}
+.btn-text:hover {
+  text-decoration: underline;
+}
+
+/* ====== form feilds ======== */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+.field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.field input,
+.field select {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+.field input:focus,
+.field select:focus {
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px var(--indigo-soft);
+  outline: none;
+}
+
+.field-inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.error-text {
+  color: var(--red);
+  font-size: 0.82rem;
+  min-height: 1.1em;
+}
+
+.empty-text {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.hidden {
+  display: none !important;
+  /* !important makes the property take priority over the others even if inline styling is used */
+}
+
+/* ====== togle to dark and light mode ===== */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch-track {
+  display: block;
+  width: 42px;
+  height: 24px;
+  background: var(--line);
+  border-radius: 999px;
+  transition: background var(--transition);
+  position: relative;
+}
+.switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--transition);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.switch input:checked + .switch-track {
+  background: var(--indigo);
+}
+.switch input:checked + .switch-track .switch-thumb {
+  transform: translateX(18px);
+}

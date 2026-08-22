@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinTrack Pro — Create Account</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <main class="auth-screen">
+    <div class="auth-card tick-margin">
+      <div class="ledger-mark">FinTrack <span>Pro</span></div>
+      <p class="auth-tagline">Create your account to get started.</p>
+
+      <form id="register-form" novalidate>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" autocomplete="name" placeholder="e.g. Aravind Menon">
+        </div>
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" autocomplete="username" placeholder="Choose a username">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" autocomplete="new-password" placeholder="••••••••">
+        </div>
+        <div class="field">
+          <label for="currency">Preferred currency</label>
+          <select id="currency">
+            <option value="USD">USD — US Dollar</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — British Pound</option>
+            <option value="INR" selected>INR — Indian Rupee</option>
+            <option value="JPY">JPY — Japanese Yen</option>
+          </select>
+        </div>
+
+        <p class="error-text" id="register-error"></p>
+
+        <button type="submit" class="btn btn-primary btn-block">Create account</button>
+      </form>
+
+      <p class="auth-switch">
+        Already have an account? <a href="index.html">Sign in</a>
+      </p>
+    </div>
+  </main>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

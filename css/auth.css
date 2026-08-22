@@ -1,0 +1,50 @@
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  background:
+    radial-gradient(circle at 15% 15%, var(--indigo-soft), transparent 45%),
+    var(--bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.5rem 2.25rem 2rem;
+}
+
+.auth-card .ledger-mark {
+  font-size: 1.5rem;
+}
+
+.auth-tagline {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin: 0.6rem 0 2rem;
+}
+
+.auth-card form {
+  margin-top: 0.5rem;
+}
+
+.auth-switch {
+  margin-top: 1.6rem;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.auth-switch a {
+  color: var(--indigo);
+  font-weight: 600;
+  text-decoration: none;
+}
+.auth-switch a:hover {
+  text-decoration: underline;
+}
