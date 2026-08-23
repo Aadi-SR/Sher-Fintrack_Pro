@@ -15,7 +15,7 @@ const Storage = {
     } catch (e) {
       console.error(`Storage read failed for ${key}`, e);
       return fallback;
-    } 
+    }
   },
   // private method to set the value of a key in localStorage
   _set(key, value) {
@@ -90,7 +90,7 @@ const Storage = {
   getTransactions(username) {
     return this._get(this._txKey(username), []);
   },
-  
+
   saveTransactions(username, transactions) {
     return this._set(this._txKey(username), transactions);
   },
@@ -105,7 +105,7 @@ const Storage = {
     this.saveTransactions(username, txs);
     return txs;
   },
-  
+
   /* ===== theme mode ========= */
   getDarkMode() {
     return this._get(STORAGE_KEYS.DARK_MODE, false); // defaults to light mode
